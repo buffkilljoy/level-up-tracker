@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101712">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LEVEL UP">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>LEVEL UP — Life Tracker</title>
+<style>
+:root{color-scheme:dark;--bg:#0d120f;--panel:#151e18;--panel2:#1c2820;--line:#2a3a30;--text:#f1f6f2;--muted:#9bad9f;--green:#35c879;--green2:#1b8f55;--amber:#e8b85c;--red:#ed7979}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#17251b 0,#0d120f 48%);color:var(--text);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 14px calc(24px + env(safe-area-inset-bottom))}
+main{max-width:760px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;padding:22px 2px 12px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--green);font-weight:800}.brand{font-size:30px;font-weight:900;letter-spacing:-1.5px;margin:2px 0}.sub{color:var(--muted);font-size:13px}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:12px}
+.card{background:linear-gradient(145deg,var(--panel),#121a15);border:1px solid var(--line);border-radius:19px;padding:16px;margin:12px 0;box-shadow:0 8px 28px #0002}.hero{padding:19px}.heroRow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.big{font-size:42px;font-weight:900;letter-spacing:-2px;color:var(--green);line-height:1.05}.muted{color:var(--muted)}.progress{height:9px;background:#27352b;border-radius:20px;overflow:hidden;margin:13px 0 8px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:20px;transition:width .2s}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.daynav{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;text-align:center;margin:14px 0}.daynav button{height:38px}.daytitle{font-weight:800}.date{font-size:12px;color:var(--muted)}
+button,.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:10px 13px;font-weight:700;font-size:13px;cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}.primary{background:var(--green2);border-color:var(--green2);color:white}.quiet{background:transparent}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}.calday{padding:8px 2px 7px;border-radius:10px;min-height:48px;text-align:center;font-size:13px;position:relative}.calday.selected{outline:2px solid var(--green);background:#20372a}.dot{display:block;width:5px;height:5px;border-radius:50%;background:#526258;margin:5px auto 0}.dot.done{background:var(--green)}.sectionTitle{font-size:15px;font-weight:850;margin:20px 2px 9px;display:flex;justify-content:space-between}.sectionTitle small{font-size:12px;color:var(--muted);font-weight:500}.workout{background:linear-gradient(120deg,#1b3022,#17231b);border:1px solid #31543c;border-radius:15px;padding:14px;margin:12px 0}.workout strong{font-size:19px}.workout p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.habit{display:flex;gap:12px;align-items:center;padding:13px 12px;border:1px solid var(--line);background:#131b16;border-radius:13px;margin:7px 0}.habit input{appearance:none;width:23px;height:23px;flex:0 0 23px;border:2px solid #607568;border-radius:7px;margin:0;display:grid;place-items:center}.habit input:checked{background:var(--green);border-color:var(--green)}.habit input:checked:after{content:"✓";color:#07140c;font-weight:1000;font-size:16px}.habit label{flex:1;cursor:pointer}.habit b{display:block;font-size:14px}.habit small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.habit.checked{border-color:#285a3c;background:#14251a}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;color:var(--muted)}input[type=text],input[type=number],input[type=date],textarea{width:100%;background:#0d1510;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit;font-size:14px}textarea{min-height:80px;resize:vertical}.stat{background:var(--panel2);border-radius:13px;padding:12px}.stat strong{display:block;font-size:23px}.stat span{font-size:11px;color:var(--muted)}.actions{display:flex;flex-wrap:wrap;gap:8px}.note{font-size:12px;color:var(--muted);line-height:1.5}.hidden{display:none!important}.footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0}
+details{border:1px solid var(--line);border-radius:13px;padding:12px;background:#121a15;margin:10px 0}summary{font-weight:800;cursor:pointer}.weekrow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}.weekrow:last-child{border:0}
+@media(min-width:600px){body{padding-left:24px;padding-right:24px}.brand{font-size:36px}.hero{padding:22px}.habit{padding:14px}}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div><div class="eyebrow">YOUR 30-DAY RESET</div><div class="brand">LEVEL UP<span style="color:var(--green)">.</span></div><div class="sub">Small wins. Every single day.</div></div><div class="pill" id="challengeBadge">DAY 1 / 30</div></header>
+<section class="card hero">
+ <div class="heroRow"><div><div class="eyebrow">TODAY'S PROGRESS</div><div class="big" id="percent">0%</div><div class="muted" style="font-size:13px" id="completedText">0 of 12 habits complete</div></div><div style="text-align:right"><div class="eyebrow">CHALLENGE</div><div style="font-size:22px;font-weight:900" id="dayNumber">01</div><div class="muted" style="font-size:12px" id="dateText"></div></div></div>
+ <div class="progress"><div class="bar" id="progressBar"></div></div>
+ <div class="row"><span class="note">Rest days count. Consistency over perfection.</span><span class="note" id="statusText">Keep going</span></div>
+</section>
+<section class="card">
+ <div class="row"><b>30-day calendar</b><span class="note">Tap a day to edit it</span></div><div class="calendar" id="calendar"></div>
+ <div class="daynav"><button id="prev">‹</button><div><div class="daytitle" id="dayHeading">DAY 1</div><div class="date" id="dayDate"></div></div><button id="next">›</button></div>
+</section>
+<section class="workout">
+ <div class="eyebrow">TRAINING PLAN</div><strong id="workoutName">Push</strong><p id="workoutDetail">Follow your planned session. Log your sets and reps in your workout notes.</p>
+</section>
+<div id="habitSections"></div>
+<section class="card">
+ <div class="sectionTitle" style="margin-top:0">Daily measurements <small>Optional</small></div>
+ <div class="grid2">
+  <div class="field"><label for="sleep">Sleep (hours)</label><input id="sleep" type="number" min="0" max="24" step=".25" placeholder="e.g. 8.5"></div>
+  <div class="field"><label for="water">Water (litres)</label><input id="water" type="number" min="0" max="10" step=".1" placeholder="e.g. 3"></div>
+  <div class="field"><label for="weight">Morning weight (kg)</label><input id="weight" type="number" min="0" max="300" step=".1" placeholder="Optional"></div>
+  <div class="field"><label for="calories">Calories (kcal)</label><input id="calories" type="number" min="0" max="10000" step="50" placeholder="e.g. 2850"></div>
+ </div>
+ <div class="field" style="margin-top:12px"><label for="reflection">Daily reflection</label><textarea id="reflection" placeholder="What went well? What can I improve tomorrow?"></textarea></div>
+ <div class="field" style="margin-top:12px"><label for="trainingNotes">Workout / project notes</label><textarea id="trainingNotes" placeholder="Sets, reps, financial project progress, ideas..."></textarea></div>
+</section>
+<section class="card">
+ <div class="sectionTitle" style="margin-top:0">Progress overview</div>
+ <div class="grid2">
+  <div class="stat"><strong id="totalDone">0</strong><span>HABITS COMPLETED</span></div>
+  <div class="stat"><strong id="avgRate">0%</strong><span>AVERAGE COMPLETION</span></div>
+  <div class="stat"><strong id="workoutsDone">0 / 16</strong><span>WORKOUTS COMPLETED</span></div>
+  <div class="stat"><strong id="moneyDays">0</strong><span>FINANCIAL SESSIONS</span></div>
+ </div>
+ <details><summary>Weekly review</summary><div id="weeklyReview" style="margin-top:10px"></div></details>
+ <details><summary>Backup & restore</summary><p class="note">Your tracker saves on this device in this browser. Export a backup regularly, especially before changing phones or clearing browser data.</p><div class="actions"><button class="primary" id="exportBtn">Export backup</button><button id="importBtn">Import backup</button><input class="hidden" type="file" id="importFile" accept="application/json"></div></details>
+ <details><summary>Challenge settings</summary><div class="field" style="margin-top:10px"><label for="startDate">Challenge start date</label><input id="startDate" type="date"></div><p class="note">Changing the start date changes the calendar dates, not your saved habit records.</p><button id="resetBtn" style="color:#ff9a9a">Reset all tracker data</button></details>
+</section>
+<div class="footer">Built for your progress · Data stays on this device unless you export it.</div>
+</main>
+<script>
+const KEY='levelUpTracker_v1';
+const groups=[
+ ['FITNESS',[['train','Workout / planned recovery','Follow today’s training or rest plan'],['caloriesHabit','Hit calorie target','2,800–2,900 kcal · aim for consistency']]],
+ ['HEALTH',[['waterHabit','Hit water target','Aim for 3 litres; adjust for thirst, heat and activity'],['sleepHabit','Get enough sleep','Aim for 8–9 hours']]],
+ ['HYGIENE',[['brushAM','Brush teeth — morning','2 minutes'],['brushPM','Brush teeth — night','2 minutes before bed'],['skin','Skincare routine','Morning and evening'],['shower','Personal hygiene','Shower and stay fresh']]],
+ ['APPEARANCE',[['posture','Posture exercises','5–10 minutes of comfortable mobility and strengthening']]],
+ ['EDUCATION',[['study','Focused studying','2 hours outside school'],['english','English / IELTS practice','One focused session each week']]],
+ ['MONEY',[['money','Financial improvement session','20–30 minutes on an earning skill or project']]],
+ ['MINDSET',[['reflectHabit','Daily reflection','Review today and prepare tomorrow']]]
+];
+const workouts=['Push','Pull','Recovery','Legs','Recovery','Shoulders & Arms','Rest'];
+const defaults=()=>({start:'2026-11-02',days:{}});
+let data=load(), selected=1;
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||defaults()}catch(e){return defaults()}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function dateFor(n){let d=new Date(data.start+'T12:00:00');d.setDate(d.getDate()+n-1);return d}
+function dateKey(n){return dateFor(n).toISOString().slice(0,10)}
+function record(n){return data.days[n]||(data.days[n]={checks:{},metrics:{},reflection:'',trainingNotes:''})}
+function isEnglishDue(n){return n%7===0}
+function allHabits(n){return groups.flatMap(g=>g[1]).filter(h=>h[0]!=='english'||isEnglishDue(n))}
+function completed(n){let r=record(n);return allHabits(n).filter(h=>r.checks[h[0]]).length}
+function pct(n){let hs=allHabits(n);return Math.round(completed(n)/hs.length*100)}
+function workout(n){return workouts[(n-1)%7]}
+function fmt(d){return d.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})}
+function render(){
+ const r=record(selected),hs=allHabits(selected),done=completed(selected),p=pct(selected),dt=dateFor(selected);
+ document.getElementById('percent').textContent=p+'%';document.getElementById('completedText').textContent=`${done} of ${hs.length} habits complete`;
+ document.getElementById('progressBar').style.width=p+'%';document.getElementById('dayNumber').textContent=String(selected).padStart(2,'0');
+ document.getElementById('dateText').textContent=fmt(dt);document.getElementById('dayHeading').textContent='DAY '+selected;document.getElementById('dayDate').textContent=fmt(dt);
+ document.getElementById('challengeBadge').textContent=`DAY ${selected} / 30`;document.getElementById('statusText').textContent=p===100?'All done!':p>=50?'Great progress':'One step at a time';
+ document.getElementById('prev').disabled=selected===1;document.getElementById('next').disabled=selected===30;
+ let w=workout(selected);document.getElementById('workoutName').textContent=w;
+ document.getElementById('workoutDetail').textContent=['Recovery','Rest'].includes(w)?'No lifting today. Prioritize recovery, gentle movement and sleep.':'Complete your '+w+' session. Record sets, reps and progress in your notes.';
+ document.getElementById('habitSections').innerHTML=groups.map(([name,items])=>{let visible=items.filter(h=>h[0]!=='english'||isEnglishDue(selected));return `<div class="sectionTitle">${name}<small>${visible.filter(h=>r.checks[h[0]]).length}/${visible.length}</small></div>`+visible.map(h=>`<div class="habit ${r.checks[h[0]]?'checked':''}"><input type="checkbox" id="${h[0]}" data-habit="${h[0]}" ${r.checks[h[0]]?'checked':''}><label for="${h[0]}"><b>${h[1]}</b><small>${h[2]}</small></label></div>`).join('')}).join('');
+ document.querySelectorAll('[data-habit]').forEach(el=>el.addEventListener('change',e=>{record(selected).checks[e.target.dataset.habit]=e.target.checked;save()}));
+ ['sleep','water','weight','calories'].forEach(k=>document.getElementById(k).value=r.metrics[k]??'');
+ document.getElementById('reflection').value=r.reflection||'';document.getElementById('trainingNotes').value=r.trainingNotes||'';
+ document.getElementById('startDate').value=data.start;
+ document.getElementById('calendar').innerHTML=Array.from({length:30},(_,i)=>i+1).map(n=>`<button class="calday ${n===selected?'selected':''}" data-day="${n}">${n}<span class="dot ${completed(n)>0?'done':''}"></span></button>`).join('');
+ document.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>{selected=+b.dataset.day;render()}));
+ let total=0,possible=0,workoutsDone=0,money=0;for(let n=1;n<=30;n++){total+=completed(n);possible+=allHabits(n).length;if(record(n).checks.train&&!['Recovery','Rest'].includes(workout(n)))workoutsDone++;if(record(n).checks.money)money++}
+ document.getElementById('totalDone').textContent=total;document.getElementById('avgRate').textContent=Math.round(total/possible*100)+'%';document.getElementById('workoutsDone').textContent=workoutsDone+' / 16';document.getElementById('moneyDays').textContent=money;
+ let weeks='';for(let s=1;s<=30;s+=7){let e=Math.min(s+6,30),sum=0,max=0;for(let n=s;n<=e;n++){sum+=completed(n);max+=allHabits(n).length}weeks+=`<div class="weekrow"><span>Days ${s}–${e}</span><b>${Math.round(sum/max*100)}% complete</b></div>`}
+ document.getElementById('weeklyReview').innerHTML=weeks;
+}
+document.getElementById('prev').onclick=()=>{selected=Math.max(1,selected-1);render()};document.getElementById('next').onclick=()=>{selected=Math.min(30,selected+1);render()};
+['sleep','water','weight','calories'].forEach(k=>document.getElementById(k).addEventListener('input',e=>{record(selected).metrics[k]=e.target.value;save()}));
+['reflection','trainingNotes'].forEach(k=>document.getElementById(k).addEventListener('input',e=>{record(selected)[k]=e.target.value;localStorage.setItem(KEY,JSON.stringify(data))}));
+document.getElementById('startDate').addEventListener('change',e=>{if(e.target.value){data.start=e.target.value;save()}});
+document.getElementById('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='level-up-backup.json';a.click();URL.revokeObjectURL(a.href)};
+document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!x.start||!x.days)throw Error();data=x;save();alert('Backup restored.')}catch(err){alert('That backup file could not be read.')}};
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Delete ALL saved tracker data on this device? Export a backup first if needed.')){data=defaults();selected=1;save()}};
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+render();
+</script>
+</body></html>
